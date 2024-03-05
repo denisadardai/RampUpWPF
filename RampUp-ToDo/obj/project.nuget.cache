@@ -1,0 +1,23 @@
+{
+  "version": 2,
+  "dgSpecHash": "dRZMx6TnayCsbxf7Ht87nY4IYGTJRkESvtTKQ65RjE3SMZF/RniOR0XNyjsHz6m29Hi+jW7BxVhdZH8BobgzTA==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\denisa.dardai\\source\\repos\\RampUp-ToDo\\RampUp-ToDo\\RampUp-ToDo.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\denisa.dardai\\.nuget\\packages\\litedb\\5.0.19\\litedb.5.0.19.nupkg.sha512",
+    "C:\\Users\\denisa.dardai\\.nuget\\packages\\maikebing.entityframeworkcore.litedb\\0.0.14\\maikebing.entityframeworkcore.litedb.0.0.14.nupkg.sha512",
+    "C:\\Users\\denisa.dardai\\.nuget\\packages\\microsoft.entityframeworkcore\\8.0.2\\microsoft.entityframeworkcore.8.0.2.nupkg.sha512",
+    "C:\\Users\\denisa.dardai\\.nuget\\packages\\microsoft.entityframeworkcore.abstractions\\8.0.2\\microsoft.entityframeworkcore.abstractions.8.0.2.nupkg.sha512",
+    "C:\\Users\\denisa.dardai\\.nuget\\packages\\microsoft.entityframeworkcore.analyzers\\8.0.2\\microsoft.entityframeworkcore.analyzers.8.0.2.nupkg.sha512",
+    "C:\\Users\\denisa.dardai\\.nuget\\packages\\microsoft.extensions.caching.abstractions\\8.0.0\\microsoft.extensions.caching.abstractions.8.0.0.nupkg.sha512",
+    "C:\\Users\\denisa.dardai\\.nuget\\packages\\microsoft.extensions.caching.memory\\8.0.0\\microsoft.extensions.caching.memory.8.0.0.nupkg.sha512",
+    "C:\\Users\\denisa.dardai\\.nuget\\packages\\microsoft.extensions.dependencyinjection\\8.0.0\\microsoft.extensions.dependencyinjection.8.0.0.nupkg.sha512",
+    "C:\\Users\\denisa.dardai\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\8.0.0\\microsoft.extensions.dependencyinjection.abstractions.8.0.0.nupkg.sha512",
+    "C:\\Users\\denisa.dardai\\.nuget\\packages\\microsoft.extensions.logging\\8.0.0\\microsoft.extensions.logging.8.0.0.nupkg.sha512",
+    "C:\\Users\\denisa.dardai\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\8.0.0\\microsoft.extensions.logging.abstractions.8.0.0.nupkg.sha512",
+    "C:\\Users\\denisa.dardai\\.nuget\\packages\\microsoft.extensions.options\\8.0.0\\microsoft.extensions.options.8.0.0.nupkg.sha512",
+    "C:\\Users\\denisa.dardai\\.nuget\\packages\\microsoft.extensions.primitives\\8.0.0\\microsoft.extensions.primitives.8.0.0.nupkg.sha512",
+    "C:\\Users\\denisa.dardai\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}

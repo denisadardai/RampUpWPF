@@ -1,0 +1,52 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\denisa.dardai\\source\\repos\\RampUp-ToDo\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{C85CFD25-7AAC-492E-9F12-D7075FE6AE57}|RampUp-ToDo\\RampUp-ToDo.csproj|c:\\users\\denisa.dardai\\source\\repos\\rampup-todo\\rampup-todo\\views\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{C85CFD25-7AAC-492E-9F12-D7075FE6AE57}|RampUp-ToDo\\RampUp-ToDo.csproj|solutionrelative:rampup-todo\\views\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C85CFD25-7AAC-492E-9F12-D7075FE6AE57}|RampUp-ToDo\\RampUp-ToDo.csproj|c:\\users\\denisa.dardai\\source\\repos\\rampup-todo\\rampup-todo\\viewmodels\\taskviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C85CFD25-7AAC-492E-9F12-D7075FE6AE57}|RampUp-ToDo\\RampUp-ToDo.csproj|solutionrelative:rampup-todo\\viewmodels\\taskviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 178,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "TaskViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\denisa.dardai\\source\\repos\\RampUp-ToDo\\RampUp-ToDo\\ViewModels\\TaskViewModel.cs",
+              "RelativeDocumentMoniker": "RampUp-ToDo\\ViewModels\\TaskViewModel.cs",
+              "ToolTip": "C:\\Users\\denisa.dardai\\source\\repos\\RampUp-ToDo\\RampUp-ToDo\\ViewModels\\TaskViewModel.cs",
+              "RelativeToolTip": "RampUp-ToDo\\ViewModels\\TaskViewModel.cs",
+              "ViewState": "AQIAACEAAAAAAAAAAAAowDUAAAA0AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-05T08:20:59.706Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "MainWindow.xaml",
+              "DocumentMoniker": "C:\\Users\\denisa.dardai\\source\\repos\\RampUp-ToDo\\RampUp-ToDo\\Views\\MainWindow.xaml",
+              "RelativeDocumentMoniker": "RampUp-ToDo\\Views\\MainWindow.xaml",
+              "ToolTip": "C:\\Users\\denisa.dardai\\source\\repos\\RampUp-ToDo\\RampUp-ToDo\\Views\\MainWindow.xaml",
+              "RelativeToolTip": "RampUp-ToDo\\Views\\MainWindow.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2024-03-05T08:12:30.193Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
