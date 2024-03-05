@@ -8,6 +8,6 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = RampUp_ToDo
-build_property.ProjectDir = C:\Users\denisa.dardai\source\repos\RampUp-ToDo\RampUp-ToDo\
+build_property.ProjectDir = C:\Users\denisa.dardai\source\repos\denisadardai\RampUpWPF\RampUp-ToDo\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
