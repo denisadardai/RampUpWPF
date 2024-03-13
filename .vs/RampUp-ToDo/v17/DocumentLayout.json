@@ -1,14 +1,53 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\denisa.dardai\\source\\repos\\RampUp-ToDo\\",
+  "WorkspaceRootPath": "C:\\Users\\denisa.dardai\\source\\repos\\denisadardai\\RampUpWPF\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{C85CFD25-7AAC-492E-9F12-D7075FE6AE57}|RampUp-ToDo\\RampUp-ToDo.csproj|c:\\users\\denisa.dardai\\source\\repos\\rampup-todo\\rampup-todo\\views\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "AbsoluteMoniker": "D:0:0:{C85CFD25-7AAC-492E-9F12-D7075FE6AE57}|RampUp-ToDo\\RampUp-ToDo.csproj|c:\\users\\denisa.dardai\\source\\repos\\denisadardai\\rampupwpf\\rampup-todo\\viewmodels\\taskviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C85CFD25-7AAC-492E-9F12-D7075FE6AE57}|RampUp-ToDo\\RampUp-ToDo.csproj|solutionrelative:rampup-todo\\viewmodels\\taskviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C85CFD25-7AAC-492E-9F12-D7075FE6AE57}|RampUp-ToDo\\RampUp-ToDo.csproj|c:\\users\\denisa.dardai\\source\\repos\\denisadardai\\rampupwpf\\rampup-todo\\views\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C85CFD25-7AAC-492E-9F12-D7075FE6AE57}|RampUp-ToDo\\RampUp-ToDo.csproj|solutionrelative:rampup-todo\\views\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C85CFD25-7AAC-492E-9F12-D7075FE6AE57}|RampUp-ToDo\\RampUp-ToDo.csproj|c:\\users\\denisa.dardai\\source\\repos\\denisadardai\\rampupwpf\\rampup-todo\\viewmodels\\storageviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C85CFD25-7AAC-492E-9F12-D7075FE6AE57}|RampUp-ToDo\\RampUp-ToDo.csproj|solutionrelative:rampup-todo\\viewmodels\\storageviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C85CFD25-7AAC-492E-9F12-D7075FE6AE57}|RampUp-ToDo\\RampUp-ToDo.csproj|c:\\users\\denisa.dardai\\source\\repos\\denisadardai\\rampupwpf\\rampup-todo\\models\\taskmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C85CFD25-7AAC-492E-9F12-D7075FE6AE57}|RampUp-ToDo\\RampUp-ToDo.csproj|solutionrelative:rampup-todo\\models\\taskmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C85CFD25-7AAC-492E-9F12-D7075FE6AE57}|RampUp-ToDo\\RampUp-ToDo.csproj|c:\\users\\denisa.dardai\\source\\repos\\denisadardai\\rampupwpf\\rampup-todo\\data\\taskrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C85CFD25-7AAC-492E-9F12-D7075FE6AE57}|RampUp-ToDo\\RampUp-ToDo.csproj|solutionrelative:rampup-todo\\data\\taskrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C85CFD25-7AAC-492E-9F12-D7075FE6AE57}|RampUp-ToDo\\RampUp-ToDo.csproj|c:\\users\\denisa.dardai\\source\\repos\\denisadardai\\rampupwpf\\rampup-todo\\rampup-todo.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{C85CFD25-7AAC-492E-9F12-D7075FE6AE57}|RampUp-ToDo\\RampUp-ToDo.csproj|solutionrelative:rampup-todo\\rampup-todo.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C85CFD25-7AAC-492E-9F12-D7075FE6AE57}|RampUp-ToDo\\RampUp-ToDo.csproj|c:\\users\\denisa.dardai\\source\\repos\\denisadardai\\rampupwpf\\rampup-todo\\data\\datacontextdb.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C85CFD25-7AAC-492E-9F12-D7075FE6AE57}|RampUp-ToDo\\RampUp-ToDo.csproj|solutionrelative:rampup-todo\\data\\datacontextdb.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C85CFD25-7AAC-492E-9F12-D7075FE6AE57}|RampUp-ToDo\\RampUp-ToDo.csproj|c:\\users\\denisa.dardai\\source\\repos\\denisadardai\\rampupwpf\\rampup-todo\\models\\tagmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C85CFD25-7AAC-492E-9F12-D7075FE6AE57}|RampUp-ToDo\\RampUp-ToDo.csproj|solutionrelative:rampup-todo\\models\\tagmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C85CFD25-7AAC-492E-9F12-D7075FE6AE57}|RampUp-ToDo\\RampUp-ToDo.csproj|c:\\users\\denisa.dardai\\source\\repos\\denisadardai\\rampupwpf\\rampup-todo\\controllers\\filtercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C85CFD25-7AAC-492E-9F12-D7075FE6AE57}|RampUp-ToDo\\RampUp-ToDo.csproj|solutionrelative:rampup-todo\\controllers\\filtercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C85CFD25-7AAC-492E-9F12-D7075FE6AE57}|RampUp-ToDo\\RampUp-ToDo.csproj|c:\\users\\denisa.dardai\\source\\repos\\denisadardai\\rampupwpf\\rampup-todo\\views\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
       "RelativeMoniker": "D:0:0:{C85CFD25-7AAC-492E-9F12-D7075FE6AE57}|RampUp-ToDo\\RampUp-ToDo.csproj|solutionrelative:rampup-todo\\views\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C85CFD25-7AAC-492E-9F12-D7075FE6AE57}|RampUp-ToDo\\RampUp-ToDo.csproj|c:\\users\\denisa.dardai\\source\\repos\\rampup-todo\\rampup-todo\\viewmodels\\taskviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C85CFD25-7AAC-492E-9F12-D7075FE6AE57}|RampUp-ToDo\\RampUp-ToDo.csproj|solutionrelative:rampup-todo\\viewmodels\\taskviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\denisa.dardai\\AppData\\Local\\Temp\\.vsdbgsrc\\4d7dea58e87bd818350eebcfd3a7251b357c0557852d1a7aa346f533ec22090b\\TaskViewModel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C85CFD25-7AAC-492E-9F12-D7075FE6AE57}|RampUp-ToDo\\RampUp-ToDo.csproj|c:\\users\\denisa.dardai\\source\\repos\\denisadardai\\rampupwpf\\rampup-todo\\models\\statemodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C85CFD25-7AAC-492E-9F12-D7075FE6AE57}|RampUp-ToDo\\RampUp-ToDo.csproj|solutionrelative:rampup-todo\\models\\statemodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -18,31 +57,162 @@
       "DocumentGroups": [
         {
           "DockedWidth": 178,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "TaskViewModel.cs",
-              "DocumentMoniker": "C:\\Users\\denisa.dardai\\source\\repos\\RampUp-ToDo\\RampUp-ToDo\\ViewModels\\TaskViewModel.cs",
-              "RelativeDocumentMoniker": "RampUp-ToDo\\ViewModels\\TaskViewModel.cs",
-              "ToolTip": "C:\\Users\\denisa.dardai\\source\\repos\\RampUp-ToDo\\RampUp-ToDo\\ViewModels\\TaskViewModel.cs",
-              "RelativeToolTip": "RampUp-ToDo\\ViewModels\\TaskViewModel.cs",
-              "ViewState": "AQIAACEAAAAAAAAAAAAowDUAAAA0AAAA",
+              "DocumentIndex": 3,
+              "Title": "TaskModel.cs",
+              "DocumentMoniker": "C:\\Users\\denisa.dardai\\source\\repos\\denisadardai\\RampUpWPF\\RampUp-ToDo\\Models\\TaskModel.cs",
+              "RelativeDocumentMoniker": "RampUp-ToDo\\Models\\TaskModel.cs",
+              "ToolTip": "C:\\Users\\denisa.dardai\\source\\repos\\denisadardai\\RampUpWPF\\RampUp-ToDo\\Models\\TaskModel.cs",
+              "RelativeToolTip": "RampUp-ToDo\\Models\\TaskModel.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-05T08:20:59.706Z"
+              "WhenOpened": "2024-03-13T10:59:41.02Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "TaskRepository.cs",
+              "DocumentMoniker": "C:\\Users\\denisa.dardai\\source\\repos\\denisadardai\\RampUpWPF\\RampUp-ToDo\\Data\\TaskRepository.cs",
+              "RelativeDocumentMoniker": "RampUp-ToDo\\Data\\TaskRepository.cs",
+              "ToolTip": "C:\\Users\\denisa.dardai\\source\\repos\\denisadardai\\RampUpWPF\\RampUp-ToDo\\Data\\TaskRepository.cs",
+              "RelativeToolTip": "RampUp-ToDo\\Data\\TaskRepository.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABgAAAAJAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-13T07:33:19.131Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "TaskViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\denisa.dardai\\source\\repos\\denisadardai\\RampUpWPF\\RampUp-ToDo\\ViewModels\\TaskViewModel.cs",
+              "RelativeDocumentMoniker": "RampUp-ToDo\\ViewModels\\TaskViewModel.cs",
+              "ToolTip": "C:\\Users\\denisa.dardai\\source\\repos\\denisadardai\\RampUpWPF\\RampUp-ToDo\\ViewModels\\TaskViewModel.cs",
+              "RelativeToolTip": "RampUp-ToDo\\ViewModels\\TaskViewModel.cs",
+              "ViewState": "AQIAAHgAAAAAAAAAAAAlwJIAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-12T14:15:53.502Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "RampUp-ToDo.csproj",
+              "DocumentMoniker": "C:\\Users\\denisa.dardai\\source\\repos\\denisadardai\\RampUpWPF\\RampUp-ToDo\\RampUp-ToDo.csproj",
+              "RelativeDocumentMoniker": "RampUp-ToDo\\RampUp-ToDo.csproj",
+              "ToolTip": "C:\\Users\\denisa.dardai\\source\\repos\\denisadardai\\RampUpWPF\\RampUp-ToDo\\RampUp-ToDo.csproj",
+              "RelativeToolTip": "RampUp-ToDo\\RampUp-ToDo.csproj",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2024-03-12T13:44:43.868Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "TagModel.cs",
+              "DocumentMoniker": "C:\\Users\\denisa.dardai\\source\\repos\\denisadardai\\RampUpWPF\\RampUp-ToDo\\Models\\TagModel.cs",
+              "RelativeDocumentMoniker": "RampUp-ToDo\\Models\\TagModel.cs",
+              "ToolTip": "C:\\Users\\denisa.dardai\\source\\repos\\denisadardai\\RampUpWPF\\RampUp-ToDo\\Models\\TagModel.cs",
+              "RelativeToolTip": "RampUp-ToDo\\Models\\TagModel.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA0AAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-12T12:20:05.158Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "TaskViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\denisa.dardai\\AppData\\Local\\Temp\\.vsdbgsrc\\4d7dea58e87bd818350eebcfd3a7251b357c0557852d1a7aa346f533ec22090b\\TaskViewModel.cs",
+              "RelativeDocumentMoniker": "..\\..\\..\\..\\AppData\\Local\\Temp\\.vsdbgsrc\\4d7dea58e87bd818350eebcfd3a7251b357c0557852d1a7aa346f533ec22090b\\TaskViewModel.cs",
+              "ToolTip": "C:\\Users\\denisa.dardai\\AppData\\Local\\Temp\\.vsdbgsrc\\4d7dea58e87bd818350eebcfd3a7251b357c0557852d1a7aa346f533ec22090b\\TaskViewModel.cs",
+              "RelativeToolTip": "..\\..\\..\\..\\AppData\\Local\\Temp\\.vsdbgsrc\\4d7dea58e87bd818350eebcfd3a7251b357c0557852d1a7aa346f533ec22090b\\TaskViewModel.cs",
+              "ViewState": "AQIAAK4AAAAAAAAAAAAnwMYAAAADAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-12T09:14:04.947Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "StorageViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\denisa.dardai\\source\\repos\\denisadardai\\RampUpWPF\\RampUp-ToDo\\ViewModels\\StorageViewModel.cs",
+              "RelativeDocumentMoniker": "RampUp-ToDo\\ViewModels\\StorageViewModel.cs",
+              "ToolTip": "C:\\Users\\denisa.dardai\\source\\repos\\denisadardai\\RampUpWPF\\RampUp-ToDo\\ViewModels\\StorageViewModel.cs",
+              "RelativeToolTip": "RampUp-ToDo\\ViewModels\\StorageViewModel.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABEAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-12T07:51:10.513Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "DataContextDB.cs",
+              "DocumentMoniker": "C:\\Users\\denisa.dardai\\source\\repos\\denisadardai\\RampUpWPF\\RampUp-ToDo\\Data\\DataContextDB.cs",
+              "RelativeDocumentMoniker": "RampUp-ToDo\\Data\\DataContextDB.cs",
+              "ToolTip": "C:\\Users\\denisa.dardai\\source\\repos\\denisadardai\\RampUpWPF\\RampUp-ToDo\\Data\\DataContextDB.cs",
+              "RelativeToolTip": "RampUp-ToDo\\Data\\DataContextDB.cs",
+              "ViewState": "AQIAAAYAAAAAAAAAAAAhwA8AAAAWAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-12T07:15:47.029Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "StateModel.cs",
+              "DocumentMoniker": "C:\\Users\\denisa.dardai\\source\\repos\\denisadardai\\RampUpWPF\\RampUp-ToDo\\Models\\StateModel.cs",
+              "RelativeDocumentMoniker": "RampUp-ToDo\\Models\\StateModel.cs",
+              "ToolTip": "C:\\Users\\denisa.dardai\\source\\repos\\denisadardai\\RampUpWPF\\RampUp-ToDo\\Models\\StateModel.cs",
+              "RelativeToolTip": "RampUp-ToDo\\Models\\StateModel.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-11T12:41:31.216Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "FilterController.cs",
+              "DocumentMoniker": "C:\\Users\\denisa.dardai\\source\\repos\\denisadardai\\RampUpWPF\\RampUp-ToDo\\Controllers\\FilterController.cs",
+              "RelativeDocumentMoniker": "RampUp-ToDo\\Controllers\\FilterController.cs",
+              "ToolTip": "C:\\Users\\denisa.dardai\\source\\repos\\denisadardai\\RampUpWPF\\RampUp-ToDo\\Controllers\\FilterController.cs",
+              "RelativeToolTip": "RampUp-ToDo\\Controllers\\FilterController.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAUAAAAFAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-11T12:35:55.314Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "MainWindow.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\denisa.dardai\\source\\repos\\denisadardai\\RampUpWPF\\RampUp-ToDo\\Views\\MainWindow.xaml.cs",
+              "RelativeDocumentMoniker": "RampUp-ToDo\\Views\\MainWindow.xaml.cs",
+              "ToolTip": "C:\\Users\\denisa.dardai\\source\\repos\\denisadardai\\RampUpWPF\\RampUp-ToDo\\Views\\MainWindow.xaml.cs*",
+              "RelativeToolTip": "RampUp-ToDo\\Views\\MainWindow.xaml.cs*",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABQAAAAuAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-06T11:40:54.804Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
               "Title": "MainWindow.xaml",
-              "DocumentMoniker": "C:\\Users\\denisa.dardai\\source\\repos\\RampUp-ToDo\\RampUp-ToDo\\Views\\MainWindow.xaml",
+              "DocumentMoniker": "C:\\Users\\denisa.dardai\\source\\repos\\denisadardai\\RampUpWPF\\RampUp-ToDo\\Views\\MainWindow.xaml",
               "RelativeDocumentMoniker": "RampUp-ToDo\\Views\\MainWindow.xaml",
-              "ToolTip": "C:\\Users\\denisa.dardai\\source\\repos\\RampUp-ToDo\\RampUp-ToDo\\Views\\MainWindow.xaml",
+              "ToolTip": "C:\\Users\\denisa.dardai\\source\\repos\\denisadardai\\RampUpWPF\\RampUp-ToDo\\Views\\MainWindow.xaml",
               "RelativeToolTip": "RampUp-ToDo\\Views\\MainWindow.xaml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-03-05T08:12:30.193Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-03-06T11:37:14.897Z"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
             }
           ]
         }

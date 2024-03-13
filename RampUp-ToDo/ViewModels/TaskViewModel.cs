@@ -1,81 +1,132 @@
-﻿using RampUp_ToDo.Commands;
+﻿using DynamicData;
+using DynamicData.Binding;
+using RampUp_ToDo.Commands;
+using RampUp_ToDo.Controllers;
 using RampUp_ToDo.Entities;
-using RampUp_ToDo.Repositories;
-using System.Collections.ObjectModel;
+using RampUp_ToDo.Interfaces;
+using RampUp_ToDo.Models;
 using System.ComponentModel;
+using System.Reactive.Concurrency;
+using System.Reactive.Linq;
 using System.Windows.Input;
 
 namespace RampUp_ToDo.ViewModels
 {
-    public class TaskViewModel : INotifyPropertyChanged
+    public class TaskViewModel : INotifyPropertyChanged, IDisposable
     {
-        private readonly DataContextFile _frepo;
-        private readonly DataContextDB _dbrepo;
         public event PropertyChangedEventHandler? PropertyChanged;
-        private bool _status;
-        private string _selectedStorageType;
-        private ObservableCollection<TaskModel> _allToDos;
+        private StorageViewModel _selectedStorageType;
+        private FilterViewModel _selectedFilters;
+        private StateModel _stateSelected;
+        private string _searchContent;
+        private ITaskRepository _taskRepository;
+        private readonly object _taskDisposable;
 
-        public string[] StoringTypes { get; set; }
+        public TagModel Tag { get; set; }
+        public IEnumerable<StorageViewModel> StoringTypes { get; set; }
+        public FilterViewModel Filters { get; set; }
+        public IEnumerable<StateModel> StateTypes { get; set; }
+        public IEnumerable<TagModel> TagsTypes { get; set; }
         public ICommand AddCommand { get; set; }
         public ICommand DeleteCommand { get; set; }
-        public ICommand CheckedCommand { get; set; }
-        public TaskViewModel()
+        //public ICommand CheckedCommand { get; set; }
+        public ICommand SearchCommand { get; set; }
+        public TaskViewModel(IEnumerable<StorageViewModel> storageTypes)
         {
-            _frepo = new DataContextFile();
-            _dbrepo = new DataContextDB();
-            AllTodos = [];
-            StoringTypes = ["JSON", "LiteDB"];
+
+            AllToDos = new ObservableCollectionExtended<TaskModel>();
+            // Convert SourceList to ObservableCollection
+            _taskDisposable = TaskController.Instance.TasksList.Connect()
+                .ObserveOn(Scheduler.CurrentThread)
+                .Bind(AllToDos)
+                .Subscribe();
+            // Filters = filters;
+            Tag = new TagModel();
+            StoringTypes = storageTypes;
+            // StateTypes = _taskController.GetAllStates();
+            //TagsTypes = _taskController.GetAllTags();
             AddCommand = new RelayCommand(AddTask, CanAddTask);
             DeleteCommand = new RelayCommand<TaskModel>(DeleteTask);
-            CheckedCommand = new RelayCommand<TaskModel>(CheckTask);
+            SearchCommand = new RelayCommand(SearchTask, CanSearchTask);
         }
 
-        public ObservableCollection<TaskModel> FillData(string type)
+        public TaskViewModel(TaskController taskController)
+        {
+
+
+            Filters = TaskController.GetAllFilters();
+
+        }
+
+
+        private bool CanSearchTask(object obj)
+        {
+            if (Name != "")
+            {
+                return true;
+            }
+            return false;
+        }
+
+        private void SearchTask(object obj)
+        {
+            AllToDos = new ObservableCollectionExtended<TaskModel>(SelectedStorageType.Storage.Search(SearchContent));
+        }
+
+        public void FillData(string type)
         {
             if (type != null)
             {
-                if (type == "JSON")
+                foreach (var stype in StoringTypes)
                 {
-                    AllTodos = new ObservableCollection<TaskModel>(_frepo.GetAll());
-                }
-                else if (type == "LiteDB")
-                {
-                    AllTodos = new ObservableCollection<TaskModel>(_dbrepo.GetAll());
+                    if (type == stype.Name)
+                    {
+                        AllToDos = new ObservableCollectionExtended<TaskModel>(stype.Storage.GetAllTasks());
+                    }
                 }
             }
+        }
 
-            return AllTodos;
+        private void OnTasksChanged(IChangeSet<TaskModel> set)
+        {
+            foreach (var change in set)
+            {
+                //var item = change.Range.Count > 0 : change.Item.Current;
+
+            }
         }
 
         private void AddTask(object obj)
         {
-            TaskModel newtask = new TaskModel();
-            for (int i = 0; i < AllTodos.Count; i++)
+
+            TaskModel newtask = new TaskModel
             {
-                if (i == AllTodos.Count - 1)
+                Id = new Guid(),
+                Name = Name,
+                Description = Description,
+                AssignedTo = AssignedTo
+            };
+            Tag.TaskId = newtask.Id;
+            Tag.Id = new Guid();
+            newtask.TagsList.Append(Tag);
+            newtask.State = new StateModel()
+            {
+                Id = StateTypes.ToArray()[0].Id,
+                Name = StateTypes.ToArray()[0].Name
+            };
+            foreach (var stype in StoringTypes)
+            {
+                if (stype.Name == stype.Name)
                 {
-                    var taskId = AllTodos[i].Id;
-                    newtask.Id = taskId + 1;
+                    stype.Storage.Insert(newtask);
                 }
             }
-            newtask.Status = false;
-            newtask.Description = Description;
-            newtask.AssignedTo = AssignedTo;
-            AllTodos.Add(newtask);
-            if (SelectedStorageType == "JSON")
-            {
-                _frepo.Insert(newtask);
-            }
-            else
-            {
-                _dbrepo.Insert(newtask);
-            }
+            _taskController.AddTask(newtask);
 
         }
         private bool CanAddTask(object obj)
         {
-            if (Description !=null && AssignedTo != null)
+            if (Description != null && AssignedTo != null)
             {
                 return true;
             }
@@ -83,74 +134,97 @@ namespace RampUp_ToDo.ViewModels
         }
         private void DeleteTask(TaskModel obj)
         {
-            AllTodos.Remove(obj);
-            if (SelectedStorageType == "JSON")
+            AllToDos.Remove(obj);
+            foreach (var stype in StoringTypes)
             {
-                _frepo.Delete(obj);
-            }
-            else
-            {
-                _dbrepo.Delete(obj);
-            }
-        }
-        private void CheckTask(TaskModel model)
-        {
-            model.Status = true;
-            for (int i = 0; i < AllTodos.Count; i++)
-            {
-                if (AllTodos[i].Id == model.Id)
+                if (SelectedStorageType.Name == stype.Name)
                 {
-                    AllTodos[i].Status = model.Status;
+                    stype.Storage.Delete(obj);
                 }
             }
-
-            if (SelectedStorageType == "JSON")
-            {
-                _frepo.Update(model);
-            }
-            else
-            {
-                _dbrepo.Update(model);
-            }
         }
+
         public void OnPropertyChanged(string property)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property));
         }
-        public ObservableCollection<TaskModel> AllTodos{
-            get => _allToDos;
+        public ObservableCollectionExtended<TaskModel> AllToDos { get; }
+        public string Description { get; set; }
+        public string AssignedTo { get; set; }
+        public string Name { get; set; }
+
+        public string SearchContent
+        {
+            get => _searchContent;
             set
             {
-                _allToDos = value;
-                OnPropertyChanged(nameof(AllTodos));
-            }}
-       public string Description { get; set; }
-       public string AssignedTo { get; set;}
-       public string SelectedStorageType
-       {
-           get => _selectedStorageType;
-           set
-           {
-               if (_selectedStorageType != value)
-               {
-                   _selectedStorageType = value;
+                if (_searchContent != value)
+                {
+                    _searchContent = value;
+                    OnPropertyChanged(nameof(SearchContent));
+                    //AllToDos = _taskController.GetSearchData(SearchContent);
+                }
+            }
+        }
+        public StorageViewModel SelectedStorageType
+        {
+            get => _selectedStorageType;
+            set
+            {
+                if (_selectedStorageType != value)
+                {
+                    _selectedStorageType = value;
                     OnPropertyChanged(nameof(SelectedStorageType));
-                    AllTodos = FillData(_selectedStorageType);
-               }
-           }
-       }
-        public bool Status
-       {
-           get => _status;
-           set
-           {
-               if (_status != value)
-               {
-                   _status = value;
+                    // AllToDos = FillData(SelectedStorageType.Name);
+                }
+            }
+        }
+        public FilterViewModel SelectedFilter
+        {
+            get => _selectedFilters;
+            set
+            {
+                if (_selectedFilters != value)
+                {
+                    _selectedFilters = value;
+                    OnPropertyChanged(nameof(SelectedFilter));
+                    SetFilters(_selectedFilters);
+                    // AllToDos = FilteredData(SelectedFilter);
+                }
+            }
+        }
 
-                   OnPropertyChanged(nameof(Status));
-               }
-           }
-       }
+        private void SetFilters(FilterViewModel selectedFilter)
+        {
+            throw new NotImplementedException();
+        }
+
+        public StateModel StateSelected
+        {
+            get => _stateSelected;
+            set
+            {
+                if (_stateSelected != value)
+                {
+                    _stateSelected = value;
+                    OnPropertyChanged(nameof(StateSelected));
+                    //  AllToDos = FilteredData(SelectedFilter);
+                }
+            }
+        }
+
+        private ObservableCollectionExtended<TaskModel> FilteredData(FilterViewModel filterVM)
+        {
+            if (filterVM != null)
+            {
+                AllToDos = new ObservableCollectionExtended<TaskModel>(SelectedStorageType.Storage.GetFilteredData(filterVM));
+            }
+            return (ObservableCollectionExtended<TaskModel>)AllToDos;
+        }
+
+        public void Dispose()
+        {
+            taskDisposable.Dispose();
+        }
     }
 }

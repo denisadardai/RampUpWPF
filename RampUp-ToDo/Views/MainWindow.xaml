@@ -5,24 +5,62 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:viewModels="clr-namespace:RampUp_ToDo.ViewModels" d:DataContext="{d:DesignInstance Type=viewModels:TaskViewModel}"
         mc:Ignorable="d"
-        Title="MainWindow" Height="750" Width="800">
+        Title="MainWindow" Height="800" Width="870">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="800"/>
-            <ColumnDefinition/>
+            <ColumnDefinition Width="270"/>
+            <ColumnDefinition Width="300"/>
+            <ColumnDefinition Width="270"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"></RowDefinition>
             <RowDefinition Height="5*"></RowDefinition>
             <RowDefinition Height="4*"></RowDefinition>
         </Grid.RowDefinitions>
-        <Grid Grid.Row="0">
-            <ComboBox Width="250" Height="25" x:Name="cbStorage" SelectionChanged="ListBoxItem_OnSelected" >
-                <ComboBoxItem  BindingGroup="{Binding SelectedStorageType}" Content="{Binding StoringTypes[0]}"></ComboBoxItem>
-                <ComboBoxItem  BindingGroup="{Binding SelectedStorageType}" Content="{Binding StoringTypes[1]}"></ComboBoxItem>
+        <Grid Grid.Row="0" Grid.Column="0">
+            <Label Content="Filter:" Margin=" 30 0  0 0 "></Label>
+            <ListBox >
+                <ListBoxItem>
+
+                </ListBoxItem>
+            </ListBox>
+            <CheckBox x:Name="cbStates" VerticalAlignment="Center" HorizontalAlignment="Center" IsChecked="{Binding SelectedFilter.States, Mode=TwoWay}"
+                      Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Grid}}, Path= DataContext.CheckedCommand}" CommandParameter="{Binding}"></CheckBox>
+            <TextBlock Text="{Binding StateTypes}"></TextBlock>
+            <ComboBox Width="200" Height="25" ItemsSource="{Binding Filters}" SelectedItem="{Binding SelectedFilter ,  Mode=TwoWay, NotifyOnSourceUpdated=True}" >
+                <ComboBox.ItemTemplate>
+                    <DataTemplate >
+                        <StackPanel>
+                            <TextBlock DataContext="{Binding States}" Text="{Binding Name}"></TextBlock>
+
+                            <CheckBox x:Name="cbStates" HorizontalAlignment="Center" DataContext="{Binding States}" IsChecked="{Binding SelectedStates , Mode=TwoWay}"
+                                      Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type viewModels:TaskViewModel}}, Path= CheckedCommand}" CommandParameter="{Binding}"></CheckBox>
+                            <TextBlock Text="{Binding Tags}"></TextBlock>
+
+                            <CheckBox x:Name="cbTags" HorizontalAlignment="Center" IsChecked="{Binding Filters.Tags , Mode=TwoWay}"
+                                      Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type viewModels:TaskViewModel}}, Path= CheckedCommand}" CommandParameter="{Binding}"></CheckBox>
+                        </StackPanel>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
             </ComboBox>
         </Grid>
-        <Grid Grid.Column="0"  Grid.Row="1">
+        <Grid Grid.Row="0" Grid.Column="1" >
+            <Label Content="Select storage:" Margin=" 45 0  0 0 "></Label>
+            <ComboBox Width="200" Height="25"  ItemsSource="{Binding StoringTypes}" SelectedItem="{Binding SelectedStorageType,  Mode=TwoWay, NotifyOnSourceUpdated=True}" >
+                <ComboBox.ItemTemplate >
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Name}"></TextBlock>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+        </Grid>
+        <Grid Grid.Row="0" Grid.Column="2">
+            <Label Content="Search:" Margin=" -5 0  0 0 "></Label>
+            <TextBox HorizontalAlignment="Left" Height="30" Width="150" Margin="0 0 0 0 " Text="{Binding SearchContent}"></TextBox>
+            <Button Width="90" Margin="0 0 25 0" Height="25" HorizontalAlignment="Right" Content="Search"
+                    Command="{Binding  Path= SearchCommand}" CommandParameter="{Binding}"></Button>
+        </Grid>
+        <Grid Grid.Column="0"  Grid.Row="1" Grid.ColumnSpan="3">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"></RowDefinition>
                 <RowDefinition Height="1*"></RowDefinition>
@@ -31,23 +69,25 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*"></ColumnDefinition>
                 <ColumnDefinition Width="1*"></ColumnDefinition>
-                <ColumnDefinition Width="3*"></ColumnDefinition>
+                <ColumnDefinition Width="1*"></ColumnDefinition>
+                <ColumnDefinition Width="2*"></ColumnDefinition>
                 <ColumnDefinition Width="1*"></ColumnDefinition>
                 <ColumnDefinition Width="2*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
 
-            <Label Grid.Column="0" Grid.Row="0" HorizontalAlignment="Center">Status</Label>
-            <Label Grid.Column="1" Grid.Row="0" HorizontalAlignment="Center" >Id</Label>
-            <Label Grid.Column="2" Grid.Row="0" HorizontalAlignment="Center">Description</Label>
-            <Label Grid.Column="3" Grid.Row="0" HorizontalAlignment="Center">Assigned to</Label>
-            <Label Grid.Column="4" Grid.Row="0" HorizontalAlignment="Center">Delete task</Label>
+            <Label Grid.Column="0" Grid.Row="0" HorizontalAlignment="Center">Tags</Label>
+            <Label Grid.Column="1" Grid.Row="0" HorizontalAlignment="Center" >State</Label>
+            <Label Grid.Column="2" Grid.Row="0" HorizontalAlignment="Center">Name</Label>
+            <Label Grid.Column="3" Grid.Row="0" HorizontalAlignment="Center">Description</Label>
+            <Label Grid.Column="4" Grid.Row="0" HorizontalAlignment="Center">Assigned to</Label>
+            <Label Grid.Column="5" Grid.Row="0" HorizontalAlignment="Center">Delete task</Label>
 
-            <ListView Grid.Column="0" x:Name="ListView" Grid.Row="1"  ItemsSource="{Binding AllTodos, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Height="200" Grid.ColumnSpan="5" >
+            <ListView Grid.Column="0" x:Name="ListView" Grid.Row="1"  ItemsSource="{Binding AllTodos, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Height="300" Grid.ColumnSpan="6" >
                 <ListView.ItemTemplate>
 
                     <DataTemplate>
                         <StackPanel HorizontalAlignment="Left">
-                            <Grid Width="761" >
+                            <Grid Width="850" >
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="2*"></RowDefinition>
                                     <RowDefinition Height="1*"></RowDefinition>
@@ -56,29 +96,31 @@
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="1*"></ColumnDefinition>
                                     <ColumnDefinition Width="1*"></ColumnDefinition>
-                                    <ColumnDefinition Width="3*"></ColumnDefinition>
-                                    <ColumnDefinition Width="1*"></ColumnDefinition>
                                     <ColumnDefinition Width="2*"></ColumnDefinition>
+                                    <ColumnDefinition Width="4*"></ColumnDefinition>
+                                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                                    <ColumnDefinition Width="3*"></ColumnDefinition>
                                 </Grid.ColumnDefinitions>
-                                <CheckBox x:Name="cbStatus"  Grid.Column="0" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" IsChecked="{Binding Status, Mode=TwoWay}"
-                                       Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListView}}, Path= DataContext.CheckedCommand}" CommandParameter="{Binding}"></CheckBox>
-                                <TextBlock  Grid.Column="1" Grid.Row="1" HorizontalAlignment="Center"  Text="{Binding Id,Mode=TwoWay}"></TextBlock>
-                                <TextBlock  Grid.Column="2" Grid.Row="1" HorizontalAlignment="Center"  Text="{Binding Description, Mode=TwoWay}"></TextBlock>
-                                <TextBlock Grid.Column="3" Grid.Row="1" HorizontalAlignment="Center"  Text="{Binding AssignedTo, Mode=TwoWay}"></TextBlock>
+                                <TextBox Grid.Column="0" Grid.Row="1" DataContext="{Binding TagsList}" Text="{Binding Name}"></TextBox>
+                                <TextBlock  Grid.Column="1" Grid.Row="1" HorizontalAlignment="Right"  Text="{Binding State.Name,Mode=TwoWay}" x:Name="tbProgress"></TextBlock>
+                                <TextBlock  Grid.Column="2" Grid.Row="1" HorizontalAlignment="Right" Text="{Binding Name,Mode=TwoWay}"></TextBlock>
+                                <TextBlock  Grid.Column="3" Grid.Row="1" HorizontalAlignment="Center"  Text="{Binding Description, Mode=TwoWay}"></TextBlock>
+                                <TextBlock Grid.Column="4" Grid.Row="1" HorizontalAlignment="Center"  Text="{Binding AssignedTo, Mode=TwoWay}"></TextBlock>
 
-                                <Button Grid.Column="4" Grid.Row="1" Width="90" Margin="10 0 0 0" Height="25" HorizontalAlignment="Center" Content="Delete" 
+                                <Button Grid.Column="5" Grid.Row="1" Width="90" Margin="10 0 0 0" Height="25" HorizontalAlignment="Center" Content="Delete" 
                                      Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListView}}, Path= DataContext.DeleteCommand}" CommandParameter="{Binding}"></Button>
 
                             </Grid>
 
                         </StackPanel>
+                       
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
         </Grid>
-        <Grid Column="0" Grid.Row="2" VerticalAlignment="Center" Width="800">
+        <Grid Column="0" Grid.Row="2" VerticalAlignment="Center" Width="800" Grid.ColumnSpan="2" >
             <Grid.RowDefinitions>
-                <RowDefinition Height="250"></RowDefinition>
+                <RowDefinition Height="300"></RowDefinition>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*"/>
@@ -96,6 +138,8 @@
                     <RowDefinition Height="1*"></RowDefinition>
                     <RowDefinition Height="1*"></RowDefinition>
                     <RowDefinition Height="1*"></RowDefinition>
+                    <RowDefinition Height="1*"></RowDefinition>
+                    <RowDefinition Height="1*"></RowDefinition>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="1*"/>
@@ -105,11 +149,15 @@
 
                 </Grid.ColumnDefinitions>
                 <Label Grid.Column="0" Grid.Row="0" FontSize="20" FontWeight="Bold" Content="Add task" HorizontalAlignment="Center" Grid.ColumnSpan="3" Margin="70 0 0 0"></Label>
-                <Label Grid.Row="1"  Grid.Column="0" Content="Description:" Margin="20 10 0 0" Grid.ColumnSpan="2"></Label>
-                <TextBox Grid.Row="1" Grid.Column="1" Height="30" Text="{Binding Description}" Width="150" Margin="10" Grid.ColumnSpan="3"></TextBox>
-                <Label Grid.Row="2" Grid.Column="0"  Content="Assigned to:" Margin="20 10 0 0" Grid.ColumnSpan="2"></Label>
-                <TextBox Grid.Row="2"  Grid.Column="1" Height="30" Width="150" Text="{Binding AssignedTo}"  Grid.ColumnSpan="3"></TextBox>
-                <Button Grid.Column="0" Grid.Row="3"  Margin="10" Width="60" Height="40"  Grid.ColumnSpan="4" Content="Add"
+                <Label Grid.Row="1"  Grid.Column="0" Content="Name:" Margin="20 10 0 0" Grid.ColumnSpan="2"></Label>
+                <TextBox Grid.Row="1" Grid.Column="1" Height="30" Text="{Binding Name}" Width="150" Margin="10" Grid.ColumnSpan="3"></TextBox>
+                <Label Grid.Row="2"  Grid.Column="0" Content="Description:" Margin="20 10 0 0" Grid.ColumnSpan="2"></Label>
+                <TextBox Grid.Row="2" Grid.Column="1" Height="30" Text="{Binding Description}" Width="150" Margin="10" Grid.ColumnSpan="3"></TextBox>
+                <Label Grid.Row="3" Grid.Column="0"  Content="Assigned to:" Margin="20 10 0 0" Grid.ColumnSpan="2"></Label>
+                <TextBox Grid.Row="3"  Grid.Column="1" Height="30" Width="150" Text="{Binding AssignedTo}"  Grid.ColumnSpan="3"></TextBox>
+                <Label Grid.Row="4" Grid.Column="0"  Content="Tag:" Margin="20 10 0 0" Grid.ColumnSpan="2"></Label>
+                <TextBox Grid.Row="4"  Grid.Column="1" Height="30" Width="150" Text="{Binding Tag.Name}"  Grid.ColumnSpan="3"></TextBox>
+                <Button Grid.Column="0" Grid.Row="5"  Margin="5 5 0 0" Width="60" Height="40"  Grid.ColumnSpan="4" Content="Add"
                       Command="{Binding  Path= AddCommand}" CommandParameter="{Binding}" ></Button>
             </Grid>
 

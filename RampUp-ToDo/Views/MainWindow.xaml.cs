@@ -1,4 +1,5 @@
-﻿using RampUp_ToDo.ViewModels;
+﻿using RampUp_ToDo.Data;
+using RampUp_ToDo.ViewModels;
 using System.Windows;
 
 namespace RampUp_ToDo
@@ -8,23 +9,18 @@ namespace RampUp_ToDo
     /// </summary>
     public partial class MainWindow : Window
     {
-        TaskViewModel taskViewModel;
+        readonly TaskViewModel _taskViewModel;
+        public IEnumerable<StorageViewModel> StoringTypes =
+        [
+            new StorageViewModel("JSON", new DataContextFile()), new StorageViewModel("Database", new DataContextDB())
+        ];
+
         public MainWindow()
         {
             InitializeComponent();
-            taskViewModel = new TaskViewModel();
-            DataContext = taskViewModel;
-        }
-        private void ListBoxItem_OnSelected(object sender, RoutedEventArgs e)
-        {
-            var storageTypes = taskViewModel.StoringTypes;
-            var item = storageTypes[cbStorage.SelectedIndex];
-            if (item != null)
-            {
-                taskViewModel.SelectedStorageType = item;
-                taskViewModel.AllTodos = taskViewModel.FillData(item);
-                DataContext = taskViewModel;
-            }
+            _taskViewModel = new TaskViewModel(StoringTypes);
+
+            DataContext = _taskViewModel;
         }
     }
 }

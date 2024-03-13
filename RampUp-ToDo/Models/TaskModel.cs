@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using RampUp_ToDo.Models;
+using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
 namespace RampUp_ToDo.Entities
@@ -6,9 +7,9 @@ namespace RampUp_ToDo.Entities
     public class TaskModel : INotifyPropertyChanged
     {
         private string? _description;
-        private bool _status;
         private string? _assignedTo;
-        public int Id { get; set; }
+        public Guid Id { get; set; }
+        public string Name { get; set; }
         public string? Description
         {
             get => _description;
@@ -20,19 +21,6 @@ namespace RampUp_ToDo.Entities
                 }
             }
         }
-        public bool Status
-        {
-            get => _status;
-            set
-            {
-                if (_status != value)
-                {
-                    _status = value;
-                    OnPropertyChanged(nameof(Status));
-                }
-            }
-        }
-
         public string? AssignedTo
         {
             get => _assignedTo;
@@ -44,6 +32,8 @@ namespace RampUp_ToDo.Entities
                 }
             }
         }
+        public IEnumerable<TagModel> TagsList { get; set; }
+        public StateModel State { get; set; }
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
