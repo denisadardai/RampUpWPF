@@ -1,57 +1,55 @@
-﻿using DynamicData;
-using DynamicData.Binding;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using RampUp_ToDo.Entities;
 using RampUp_ToDo.Models;
-using RampUp_ToDo.ViewModels;
 using System.Collections.ObjectModel;
 using System.IO;
-using System.Reactive.Concurrency;
-using System.Reactive.Linq;
 
 namespace RampUp_ToDo.Data
 {
     public class DataContextFile : DatabaseService<TaskModel>
     {
+        private static DataContextFile _instance;
+        public static DataContextFile Instance
+        {
+            get
+            {
+                if (_instance == null)
+                    _instance = new DataContextFile();
+
+                return _instance;
+            }
+        }
         readonly string _path;
-        public static SourceList<TaskModel> Tasks = new();
-        public IObservableCollection<TaskModel> TasksList = new ObservableCollectionExtended<TaskModel>();
-        public override IEnumerable<StateModel> States { get; set; }
-        // public IEnumerable<TagModel> Tags { get; set; }
 
         public DataContextFile()
         {
-            _path = @"C:\Users\denisa.dardai\source\repos\denisadardai\RampUpWPF\data.json";
-            Tasks.Connect()
-                .ObserveOn(Scheduler.CurrentThread)
-                .Bind(TasksList)
-                .Subscribe();
+            _path = @"C:\Users\denisa.dardai\source\repos\denisadardai\RampUpWPF\dataFile.json";
             LoadJsonFromDisk();
         }
         public void LoadJsonFromDisk()
         {
             if (File.Exists(_path).Equals(true))
             {
-                var list = JsonConvert.DeserializeObject<IObservableCollection<TaskModel>>(File.ReadAllText(_path));
+                var list = JsonConvert.DeserializeObject<ObservableCollection<TaskModel>>(File.ReadAllText(_path));
 
                 if (list != null)
                 {
-                    TasksList = list;
+                    Tasks = list;
                 }
                 else
                 {
-                    TasksList = new ObservableCollectionExtended<TaskModel>();
+                    Tasks = [];
                 }
             }
             else
             {
-                TasksList = new ObservableCollectionExtended<TaskModel>();
+                Tasks = [];
             }
         }
 
         public override bool Insert(TaskModel entity)
         {
-            TasksList.Add(entity);
+            Tasks.ToList().Add(entity);
             var json = JsonConvert.SerializeObject(Tasks);
             if (File.Exists(_path))
             {
@@ -64,16 +62,16 @@ namespace RampUp_ToDo.Data
 
         public override bool Delete(TaskModel entity)
         {
-            if (TasksList == null)
+            if (Tasks == null)
             {
-                TasksList = new ObservableCollectionExtended<TaskModel>();
+                Tasks = [];
             }
 
-            var exists = TasksList.FirstOrDefault(t => t.Id == entity.Id);
+            var exists = Tasks.FirstOrDefault(t => t.Id == entity.Id);
             if (exists != null)
             {
-                TasksList.Remove(entity);
-                var json = JsonConvert.SerializeObject(TasksList);
+                Tasks.ToList().Remove(entity);
+                var json = JsonConvert.SerializeObject(Tasks);
                 if (File.Exists(_path))
                 {
                     File.Delete(_path);
@@ -90,16 +88,42 @@ namespace RampUp_ToDo.Data
             Insert(entity);
         }
 
+
         public override IEnumerable<TaskModel> GetAllTasks()
         {
-            return TasksList;
+
+            foreach (var task in Tasks)
+            {
+                var toDo = new TaskModel
+                {
+                    Id = task.Id,
+                    Name = task.Name,
+                    Description = task.Description,
+                    AssignedTo = task.AssignedTo,
+                    State = task.State,
+                    TagsList = task.TagsList
+                };
+                yield return toDo;
+            }
+
         }
-        public override IEnumerable<StateModel> GetAllStates()
+        public override IEnumerable<TaskModel> Search(string name)
         {
-            return States;
+            Tasks = Tasks.Where(t => t.Name.Contains(name));
+            return Tasks;
         }
 
-        public override IObservableCollection<TaskModel> GetFilteredData(FilterViewModel filterVM) => throw new NotImplementedException();
-        public override IObservableCollection<TaskModel> Search(string name) => throw new NotImplementedException();
+        public override void AddTag(TagModel newtag)
+        {
+            var task = Tasks.FirstOrDefault(x => x.Id == newtag.TaskId);
+            task.TagsList.Add(newtag);
+            Insert(task);
+        }
+
+        public override IEnumerable<TagModel> GetAllTags()
+        {
+            Tags = [];
+            return Tags;
+        }
     }
 }

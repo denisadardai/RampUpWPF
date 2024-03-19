@@ -1,10 +1,7 @@
 ﻿using RampUp_ToDo.Models;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
-
 namespace RampUp_ToDo.Entities
 {
-    public class TaskModel : INotifyPropertyChanged
+    public class TaskModel
     {
         private string? _description;
         private string? _assignedTo;
@@ -32,22 +29,8 @@ namespace RampUp_ToDo.Entities
                 }
             }
         }
-        public IEnumerable<TagModel> TagsList { get; set; }
-        public StateModel State { get; set; }
-
-        public event PropertyChangedEventHandler? PropertyChanged;
-
-        protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
-        protected bool SetField<T>(ref T field, T value, [CallerMemberName] string? propertyName = null)
-        {
-            if (EqualityComparer<T>.Default.Equals(field, value)) return false;
-            field = value;
-            OnPropertyChanged(propertyName);
-            return true;
-        }
+        public IList<TagModel> TagsList { get; set; }
+        public StateTypes State { get; set; }
+        public StoringType StoringType { get; set; }
     }
 }

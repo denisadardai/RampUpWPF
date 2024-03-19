@@ -1,16 +1,14 @@
 ﻿using DynamicData;
+using RampUp_ToDo.Data;
 using RampUp_ToDo.Entities;
 using RampUp_ToDo.Models;
 using RampUp_ToDo.ViewModels;
-using System.Reactive.Concurrency;
-using System.Reactive.Linq;
-using RampUp_ToDo.Data;
-using RampUp_ToDo.Interfaces;
 
 namespace RampUp_ToDo.Controllers
 {
     public class TaskController
     {
+
         private static TaskController _instance;
         public static TaskController Instance
         {
@@ -18,69 +16,100 @@ namespace RampUp_ToDo.Controllers
             {
                 if (_instance == null)
                     _instance = new TaskController();
+
                 return _instance;
             }
         }
-
-        private ITaskRepository _taskRepository;
-
         private static SourceList<TaskModel> _tasks = new();
+
         public IObservableList<TaskModel> TasksList => _tasks;
-
-        public IEnumerable<StateModel> States { get; set; }
-
-        public IEnumerable<TagModel> Tags { get; set; }
-
-        private DatabaseService<TaskModel> _db;
-        private TagRepository _tagRepository;
-
-        public TaskController(ITaskRepository taskRepository)
-        {
-            //_taskSubject = new Subject<TaskModel>();
-            _taskRepository = taskRepository;
-            //States = _db.GetAllStates();
-            Tags = _db.GetAllTags();
-
-        }
 
         public TaskController()
         {
+            //States = GetAllStates();
+        }
+        public void FillData(StoringType storage)
+        {
+            var store = DatabaseFactory.GetDataContext(storage);
+            _tasks.Clear();
+            _tasks.AddRange(store.GetAllTasks());
         }
 
-        public IEnumerable<TaskModel> GetAllTasks()
+        public void AddTask(string name, string description, string assignedTo, string tag, StoringType storage)
         {
-            _tasks = _taskRepository.GetAll();
-            return TasksList;
-        }
-        public IEnumerable<TagModel> GetAllTags()
-        {
-            return _tagRepository.GetAll();
+
+            var store = DatabaseFactory.GetDataContext(storage);
+            TaskModel newtask = new TaskModel
+            {
+                Id = Guid.NewGuid(),
+                Name = name,
+                Description = description,
+                AssignedTo = assignedTo,
+                StoringType = storage
+            };
+            TagModel newTag = new TagModel
+            {
+                Name = tag,
+                TaskId = newtask.Id,
+                Id = Guid.NewGuid()
+            };
+            newtask.TagsList = [newTag];
+            newtask.State = StateTypes.New;
+            store.Insert(newtask);
+            _tasks.Add(newtask);
+            _tasks.Clear();
+            _tasks.AddRange(store.GetAllTasks());
         }
 
-        //public IEnumerable<StateModel> GetAllStates()
-        // {
-        //     return _db.GetAllStates();
-        // }
-        public void AddTask(TaskModel task)
+        public void Delete(TaskModel obj, StoringType storage)
         {
-            _taskRepository.Add(task);
-            TasksList.Add(task);
-            Tasks.Connect()
-                .ObserveOn(Scheduler.CurrentThread)
-                .Bind(TasksList)
-                .Subscribe();
+            var store = DatabaseFactory.GetDataContext(storage);
+            _tasks.Remove(obj);
+            store.Delete(obj);
+            _tasks.Clear();
+            _tasks.AddRange(store.GetAllTasks());
+            //FillData(storage);
+        }
+        public IEnumerable<TagModel> GetAllTags(StoringType storage)
+        {
+            var store = DatabaseFactory.GetDataContext(storage);
+            var tags = store.GetAllTags();
+            //_tags.Clear();
+            //_tags.AddRange(store.GetAllTags());
+            return tags;
         }
 
-        public IEnumerable<TaskModel> GetSearchData(string searchContent)
+        public void UpdateTaskState(TaskModel taskModel, StateViewModel stateSelected, StoringType storage)
         {
-            TasksList = _db.Search(searchContent);
-            return TasksList;
+            var store = DatabaseFactory.GetDataContext(storage);
+            var model = _tasks.Items.SingleOrDefault(X => X.Id == taskModel.Id);
+            model.State = stateSelected.StateType;
+            store.Update(model);
+            _tasks.Clear();
+            _tasks.AddRange(store.GetAllTasks());
         }
 
-        public FilterViewModel GetAllFilters()
+
+        public void Search(string name, StoringType storage)
         {
-            FilterViewModel filters = new FilterViewModel(States, Tags);
-            return filters;
+            var store = DatabaseFactory.GetDataContext(storage);
+            var tasks= store.Search(name);
+            _tasks.Clear();
+            _tasks.AddRange(tasks);
+        }
+
+        public void AddTag(string tag, TaskModel obj, StoringType storage)
+        {
+            var store = DatabaseFactory.GetDataContext(storage);
+            TagModel newtag = new TagModel
+            {
+                Name = tag,
+                Id = Guid.NewGuid(),
+                TaskId = obj.Id
+            };
+            store.AddTag(newtag);
+            _tasks.Clear();
+            _tasks.AddRange(store.GetAllTasks());
         }
     }
 }

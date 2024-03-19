@@ -1,73 +1,76 @@
-﻿using DynamicData;
-using DynamicData.Binding;
-using LiteDB;
+﻿using LiteDB;
 using RampUp_ToDo.Entities;
 using RampUp_ToDo.Models;
 using RampUp_ToDo.ViewModels;
 using System.Collections.ObjectModel;
-using System.Reactive.Concurrency;
-using System.Reactive.Linq;
 
 namespace RampUp_ToDo.Data
 {
     public class DataContextDB : DatabaseService<TaskModel>
     {
+        private static DataContextDB _instance;
+        public static DataContextDB Instance
+        {
+            get
+            {
+                if (_instance == null)
+                    _instance = new DataContextDB();
+
+                return _instance;
+            }
+        }
         public LiteDatabase DB { get; set; }
         public LiteCollection<TaskModel> ColTasks { get; set; }
         public LiteCollection<TagModel> ColTags { get; set; }
-        public LiteCollection<StateModel> ColStates { get; set; }
-        public override IEnumerable<StateModel> States { get; set; }
-
-        public static SourceList<TaskModel> Tasks = new();
-        public IObservableCollection<TaskModel> TasksList = new ObservableCollectionExtended<TaskModel>();
-        // public ReadOnlyObservableCollection<TaskModel> filteredDataCollection;
+        public LiteCollection<StateViewModel> ColStates { get; set; }
 
         public DataContextDB()
         {
-            //filteredDataCollection = new ReadOnlyObservableCollection<TaskModel>(TasksList);
-            DB = new LiteDatabase(@"C:\Users\denisa.dardai\source\repos\denisadardai\RampUpWPF\data.db");
-            ColTasks = (LiteCollection<TaskModel>?)DB.GetCollection<TaskModel>("tasks");
+            DB = new LiteDatabase(@"C:\Users\denisa.dardai\source\repos\denisadardai\RampUpWPF\dataLite.db");
+            ColTasks = (LiteCollection<TaskModel>?)DB.GetCollection<TaskModel>("tasks").Include(t => t.TagsList)
+                .Include(s => s.State);
             var tasklist = ColTasks.FindAll().ToList();
-            TasksList = new ObservableCollectionExtended<TaskModel>();
+            Tasks = new ObservableCollection<TaskModel>(tasklist);
 
             ColTags = (LiteCollection<TagModel>?)DB.GetCollection<TagModel>("tags");
             var tagsList = ColTags.FindAll().ToList();
             Tags = new ObservableCollection<TagModel>(tagsList);
 
-            ColStates = (LiteCollection<StateModel>?)DB.GetCollection<StateModel>("states");
-            var stateList = ColStates.FindAll().ToList();
-            States = new ObservableCollection<StateModel>(stateList);
-
-            Tasks.Connect()
-                .ObserveOn(Scheduler.CurrentThread)
-                .Bind(TasksList)
-                .Subscribe();
-            InitStates();
-
         }
 
-        private void InitStates()
+        public override IEnumerable<TaskModel> GetAllTasks()
         {
-            if (States.ToArray().Length == 0)
-            {
-                var pro1 = new StateModel
-                {
-                    Name = "New"
-                };
-                ColStates.Insert(pro1);
-                var pro2 = new StateModel
-                {
-                    Name = "In Progress"
-                };
-                ColStates.Insert(pro2);
-                var pro3 = new StateModel
-                {
-                    Name = "Done"
-                };
-                ColStates.Insert(pro3);
-            }
-        }
 
+            foreach (var task in Tasks)
+            {
+                var toDo =new TaskModel
+                {
+                    Id = task.Id,
+                    Name = task.Name,
+                    Description = task.Description,
+                    AssignedTo = task.AssignedTo,
+                    State = task.State,
+
+                };
+                toDo.TagsList = ColTags.FindAll().Where(t => t.TaskId == toDo.Id).ToList();
+                yield return toDo;
+            }
+
+        }
+        public override IEnumerable<TagModel> GetAllTags()
+        {
+            foreach (var tag in Tags)
+            {
+                var s = new TagModel
+                {
+                    Id = tag.Id,
+                    Name = tag.Name,
+                    TaskId = tag.TaskId
+                };
+                yield return s;
+            }
+
+        }
         public override bool Insert(TaskModel entity)
         {
             var tags = entity.TagsList;
@@ -85,6 +88,10 @@ namespace RampUp_ToDo.Data
             var exists = ColTasks.FindOne(t => t.Id == entity.Id);
             if (exists != null)
             {
+                foreach (var tag in entity.TagsList)
+                {
+                    ColTags.Delete(tag.Id);
+                }
                 ColTasks.Delete(entity.Id);
             }
 
@@ -95,42 +102,18 @@ namespace RampUp_ToDo.Data
         {
             ColTasks.Update(entity);
         }
-        public ObservableCollection<TaskModel> GetFilteredByTags(IEnumerable<TagModel> tags)
+
+
+        public override IEnumerable<TaskModel> Search(string name)
         {
-            ObservableCollection<TaskModel> all = [];
-            foreach (var tag in tags)
-            {
-                all = (ObservableCollection<TaskModel>)ColTasks.FindAll()
-                    .Where(t => t.TagsList.Contains(tag));
-            }
-            return all;
+            var tasks = ColTasks.FindAll().Where(t => t.Name.Contains(name));
+            return tasks;
         }
 
-        public ObservableCollection<TaskModel> GetFilteredByProgress(IEnumerable<StateModel> progresses)
+        public override void AddTag(TagModel newtag)
         {
-            ObservableCollection<TaskModel> all = [];
-            foreach (var progress in progresses)
-            {
-                all = (ObservableCollection<TaskModel>)ColTasks.FindAll()
-                    .Where(t => t.State.Name == progress.Name);
-            }
-            return all;
+            ColTags.Insert(newtag);
         }
 
-        public override IObservableCollection<TaskModel> GetFilteredData(FilterViewModel filterVM)
-        {
-            TasksList = (IObservableCollection<TaskModel>)Tasks.Connect().Filter(FilterCriteria)
-                .ObserveOn(Scheduler.CurrentThread);
-            //   .Bind(out filteredDataCollection).Subscribe();
-            return TasksList;
-        }
-
-        private bool FilterCriteria(TaskModel model) => throw new NotImplementedException();
-
-        public override IObservableCollection<TaskModel> Search(string name)
-        {
-            TasksList = (IObservableCollection<TaskModel>)ColTasks.FindAll().Where(t => t.Name.Contains(name));
-            return TasksList;
-        }
     }
 }

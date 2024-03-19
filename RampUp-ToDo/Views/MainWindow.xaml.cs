@@ -1,5 +1,4 @@
-﻿using RampUp_ToDo.Data;
-using RampUp_ToDo.ViewModels;
+﻿using RampUp_ToDo.ViewModels;
 using System.Windows;
 
 namespace RampUp_ToDo
@@ -9,18 +8,13 @@ namespace RampUp_ToDo
     /// </summary>
     public partial class MainWindow : Window
     {
-        readonly TaskViewModel _taskViewModel;
-        public IEnumerable<StorageViewModel> StoringTypes =
-        [
-            new StorageViewModel("JSON", new DataContextFile()), new StorageViewModel("Database", new DataContextDB())
-        ];
+        readonly MainViewModel _mainViewModel;
 
         public MainWindow()
         {
             InitializeComponent();
-            _taskViewModel = new TaskViewModel(StoringTypes);
-
-            DataContext = _taskViewModel;
+            _mainViewModel = new MainViewModel();
+            DataContext = _mainViewModel;
         }
     }
 }

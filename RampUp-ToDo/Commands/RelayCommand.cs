@@ -13,12 +13,6 @@ namespace RampUp_ToDo.Commands
             _canExecutePredicate = CanExecuteMethod;
 
         }
-        public RelayCommand(Action<object> execute)
-            : this(execute, null)
-        {
-            _executeAction = execute;
-        }
-
         public event EventHandler? CanExecuteChanged
         {
             add
